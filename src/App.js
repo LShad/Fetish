@@ -6,10 +6,11 @@ import './App.css';
 function App() {
   return (
     <React.Fragment>
-    <div className="sticky-top container-fluid header-container border border-primary">
-      <Header/>
-    </div>
-      <AppBody/>
+	    <div className="fixed-top container-fluid header-container border border-primary">
+	     	<Header/>
+	    </div>
+	    	<Header/>
+	     	<AppBody/>
     </React.Fragment>
   );
 }
