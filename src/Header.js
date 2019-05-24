@@ -12,9 +12,9 @@ class Header extends React.Component{
 					</div>
 					<div className="col">
 						<div className="d-flex flex-row-reverse bd-highlight h-100 ">
-							<img src="heart.png" className="img-fluid" style={{width: "5%", height: "5%"}} alt="Settings"/>
+							<img src="settings.png" className="img-fluid" style={{width: "5%", height: "5%"}} alt="Settings"/>
 							<img src="empty.png" className="img-fluid" style={{width: "5%", height: "5%"}} alt=""/>
-			  				<img src="heart.png" className="img-fluid" style={{width: "5%", height: "5%"}} alt="Notifications"/>
+			  				<img src="notifications.png" className="img-fluid" style={{width: "5%", height: "5%"}} alt="Notifications"/>
 			  				<img src="empty.png" className="img-fluid" style={{width: "5%", height: "5%"}} alt=""/>
 			  				<img src="heart.png" className="img-fluid" style={{width: "5%", height: "5%"}} alt="Heart"/>
 			  			</div>
