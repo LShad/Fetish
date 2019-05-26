@@ -1,7 +1,60 @@
-.logo{
-	position: absolute;
-	width:12rem;
-	height:4.5rem;
-	margin:0 auto;
+.header-container {
+	height: 80px;
+	width: 100%;
+	/*border-style: solid;
+  	border-width: 5px; 	
+	*/
+	background-color: white;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+}
 
+.header {
+	/*border-style: solid;
+  	border-width: 5px;
+  	border-color: red;*/
+  	width: 1000px;
+  	height: 90px;
+  	margin: 0 auto;
+}
+
+.logo-container {
+	/*border-style: solid;
+  	border-width: 5px;*/
+  	position: fixed;
+  	width: 170px;
+  	margin-top: 13px;
+}
+
+.icons-container {
+	/*border-style: solid;
+  	border-width: 5px;*/
+  	float: right;
+  	height: 100%;
+
+}
+
+.buttonej {
+	width: 35px;
+	height: 25px;
+	padding-right: 12px;
+	/*border-style: solid;
+  	border-width: 5px;*/
+  	margin-top: 30px;
+}
+
+.buttonej:hover {
+	filter: invert(40%)
+}
+
+
+@media (max-width: 1000px){
+	.header {
+	  	width: 95%;
+	}	
+
+	.icons {
+		margin-left: 50%;
+	}
 }
