@@ -1,35 +1,62 @@
 import React from 'react';
 import './Header.css';
+import $ from 'jquery';
 
 class Header extends React.Component{
 	constructor(props){
 		super();
 		this.state = {
-			clicked: false
+			clicked: false,
+			count: 1,
 		}
 
 		this.onClick = this.onClick.bind(this)
 	}
 
-	onClick(event){
- 	
-		console.log("elo");
-		var event = new Event("show.bs.dropdown")
-		let element = document.getElementById("heh");
-		element.dispatchEvent(event);
-		console.log(element)
-		console.log(event)
-		this.setState({ clicked:true})
+	onClick(){
+	 	
+
+
+			fetch("http://localhost:3001/notifications")
+				.then(resp => {
+				    console.log(resp.text())
+				})
+
+			  	this.setState({
+					clicked:true,
+					count: this.state.count + 1
+				})
+	 		
+	 		this.setState({
+	 			clicked:false
+	 		})
+
+
 
 	}
 
-	componentDidMount(props){
-		console.log("elo");
+	componentDidUpdate(){
+	
+	}
+
+	componentDidMount(){
+		$('#serce').on('click', this.onClick);
+
+	
 	}
 
 
 	render(){
-		const { clicked } = this.state;
+		const { clicked, count } = this.state;
+		var items = []
+
+		for (var i=1; i<=count; i++){
+			items.push(
+				<a key={i} className="dropdown-item" href="#">{i}</a>
+				)
+		}
+
+		
 
 		return(
 			<div className="header-container ">
@@ -37,44 +64,44 @@ class Header extends React.Component{
 					<img className="logo-container" src="logoScaled.png" alt="logo"/>
 					<div className="icons-container" src="logoScaled.png" alt="logo">
 						
-						<div id="heh" className="dropdown">
-							<div onClick={this.onClick}>
-								<img className="buttonej" src="heart.png" alt="logo" />
-							</div>
-							<div className="dropdown-menu">
-							    <a className="dropdown-item" href="#">Gibonson dodał nowe zdjęcie</a>
-							</div>
+						<div className="btn-group">
+						  <div id="serce" className="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						  	<img className="buttonej" src="heart.png" alt="logo" />
+						  </div>
+						  <div className="dropdown-menu">
+						  { clicked ? (
+						  	<div>
+						  		{items}
+						    </div> )
+						  	: ( <div>Wczytywanie</div> ) }
+						  </div>
 						</div>
 
-
-						<div className="">
-							<div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<img className="buttonej" src="notifications.png" alt="logo"/>
-							</div>
-							<div className="dropdown-menu dropdown-menu-right">
-							    <a className="dropdown-item" href="#">Notify 1</a>
-							    <a className="dropdown-item" href="#">Notify 2</a>
-							    <a className="dropdown-item" href="#">Notify 3</a>
-							    <div className="dropdown-divider"></div>
-							    <a className="dropdown-item" href="#">Wyczyść</a>
-							</div>
+						<div className="btn-group">
+						  <div id="serce" className="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						  	<img className="buttonej" src="notifications.png" alt="logo" />
+						  </div>
+						  <div className="dropdown-menu">
+						  { clicked ? (
+						  	<div>
+						  		<a className="dropdown-item" href="#">{count}</a>
+						    </div> )
+						  	: ( <div>Wczytywanie</div> ) }
+						  </div>
 						</div>
 
-
-
-						<div className="">
-							<div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<img className="buttonej" src="settings.png" alt="logo"/>
-							</div>
-							<div className="dropdown-menu dropdown-menu-right">
-							    <a className="dropdown-item" href="#">Ustawienia</a>
-							    <a className="dropdown-item" href="#">Pomoc</a>
-							    <a className="dropdown-item" href="#">Zgłoś</a>
-							    <a className="dropdown-item" href="#">Donate</a>
-							    <div className="dropdown-divider"></div>
-							    <a className="dropdown-item" href="#">Wyloguj</a>
-							</div>
+						<div className="btn-group">
+						  <div id="serce" className="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						  	<img className="buttonej" src="settings.png" alt="logo" />
+						  </div>
+						  <div className="dropdown-menu">
+						  	<div>
+						  		<a className="dropdown-item" href="#">Ustawienia</a>
+						  		<a className="dropdown-item" href="#">Wyloguj</a>
+						    </div>
+						  </div>
 						</div>
+
 					</div>
 				</div>
 			</div>
