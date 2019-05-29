@@ -12,7 +12,7 @@ class FetishCard extends React.Component{
 						   <img className="img-fluid" src="test.jpg" alt="asd"/>
 					    </h6>
 					    <p className="card-text body-font-h2">
-					    	Meczik posterunken fetish
+					    	Fetyszysta Magicznego Posterunku
 					    </p>
 					  </div>
 					</div>

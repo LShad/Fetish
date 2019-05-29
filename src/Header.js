@@ -11,11 +11,10 @@ class Header extends React.Component{
 		}
 
 		this.onClick = this.onClick.bind(this)
+		this.logout = this.logout.bind(this)
 	}
 
 	onClick(){
-	 	
-
 
 			fetch("http://localhost:3001/notifications")
 				.then(resp => {
@@ -31,7 +30,13 @@ class Header extends React.Component{
 	 			clicked:false
 	 		})
 
+	}
 
+	logout(){
+		alert("Wylogowuje cie suko !")
+
+		
+		window.location.replace("/");
 
 	}
 
@@ -56,55 +61,55 @@ class Header extends React.Component{
 				)
 		}
 
-		
-
 		return(
-			<div className="header-container ">
-				<div className="header border border-primary">
-					<img className="logo-container" src="logoScaled.png" alt="logo"/>
-					<div className="icons-container" src="logoScaled.png" alt="logo">
-						
-						<div className="btn-group">
-						  <div id="serce" className="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						  	<img className="buttonej" src="heart.png" alt="logo" />
-						  </div>
-						  <div className="dropdown-menu">
-						  { clicked ? (
-						  	<div>
-						  		{items}
-						    </div> )
-						  	: ( <div>Wczytywanie</div> ) }
-						  </div>
-						</div>
+			<React.Fragment>
+				<div className="header-container ">
+					<div className="header border border-primary">
+						<img className="logo-container" src="logoScaled.png" alt="logo"/>
+						<div className="icons-container" src="logoScaled.png" alt="logo">
+							
+							<div className="btn-group">
+							  <div id="serce" className="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							  	<img className="buttonej" src="heart.png" alt="logo" />
+							  </div>
+							  <div className="dropdown-menu">
+							  { clicked ? (
+							  	<div>
+							  		{items}
+							    </div> )
+							  	: ( <div>Wczytywanie</div> ) }
+							  </div>
+							</div>
 
-						<div className="btn-group">
-						  <div id="serce" className="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						  	<img className="buttonej" src="notifications.png" alt="logo" />
-						  </div>
-						  <div className="dropdown-menu">
-						  { clicked ? (
-						  	<div>
-						  		<a className="dropdown-item" href="#">{count}</a>
-						    </div> )
-						  	: ( <div>Wczytywanie</div> ) }
-						  </div>
-						</div>
+							<div className="btn-group">
+							  <div id="serce" className="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							  	<img className="buttonej" src="notifications.png" alt="logo" />
+							  </div>
+							  <div className="dropdown-menu">
+							  { clicked ? (
+							  	<div>
+							  		<a className="dropdown-item" href="#">{count}</a>
+							    </div> )
+							  	: ( <div>Wczytywanie</div> ) }
+							  </div>
+							</div>
 
-						<div className="btn-group">
-						  <div id="serce" className="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						  	<img className="buttonej" src="settings.png" alt="logo" />
-						  </div>
-						  <div className="dropdown-menu">
-						  	<div>
-						  		<a className="dropdown-item" href="#">Ustawienia</a>
-						  		<a className="dropdown-item" href="#">Wyloguj</a>
-						    </div>
-						  </div>
-						</div>
+							<div className="btn-group">
+							  <div id="serce" className="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							  	<img className="buttonej" src="settings.png" alt="logo" />
+							  </div>
+							  <div className="dropdown-menu">
+							  	<div>
+							  		<a className="dropdown-item" href="#">Ustawienia</a>
+							  		<a className="dropdown-item" onClick={this.logout}>Wyloguj</a>
+							    </div>
+							  </div>
+							</div>
 
+						</div>
 					</div>
 				</div>
-			</div>
+			</React.Fragment>
 		);
 	}
 }

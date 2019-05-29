@@ -8,8 +8,8 @@ class AppBody extends React.Component{
 		return(
 				<div className="container border border-primary" style={{maxWidth:'1000px'}}>
 					<div className="d-inline-flex border border-secondary w-100 justify-content-center body-margin-top">
-						<FetishCard imie="Zbych"/>
-						<FetishWidgets imie="Zbych"/>
+						<FetishCard imie="Damian Ratajczak"/>
+						<FetishWidgets imie="xd"/>
 					</div>
       			</div>
 		);
