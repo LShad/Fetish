@@ -61,6 +61,13 @@ class LoginForm extends React.Component{
 		 								Show: true,
 		 							})
 		 						})
+		 						.catch( () =>{
+		 							this.setState({
+		 								Login: false,
+		 								Show: true,
+		 							})
+		 						}
+		 						)
 		}
 
 	  	const _auth = await req()
@@ -77,32 +84,17 @@ class LoginForm extends React.Component{
 			<React.Fragment>
 			{ Show ? (
 				 !Login ? (
-					<div className="container" style={{maxWidth:'1000px'}}>
-						<div className="d-inline-flex w-100 justify-content-center body-margin-top">
-							<div className="d-flex w-50">
-								<img className="" src="logo.png" alt="logo"/>
+					<div className="container-fluid h-100 border border-primary" >
+						<div className="d-inline-flex w-100  h-50 border border-secondary align-items-center">
+							<div className="d-flex w-50 border">
+								<img className="img w-100 h-100" src="logo.png" alt="logo"/>
 							</div>
-							<div className="d-block input-group w-50 mt-4">
-			  					<div className="d-block w-50">
-			  					<form method="POST" onSubmit={this.Login}>
-				  					<div className="input-group-prepend">
-				    					<input id="username" name="username" type="text" className="form-control" placeholder="Username"/>
-				 					</div>
-				  						<p/>
-				  					<div className="input-group-prepend">
-				    					<input type="password" name="password" className="form-control" placeholder="Password"/>
-				 					</div>
-				  						<p/>
-				  						<button className="btn btn-secondary" onClick={this.Register}>
-											{ Register ? (<div>...</div>) : (<div>Register</div>) } 
-				  						</button>
-
-				  						<button type="submit" className="btn btn-secondary ml-2">
-				  							Login 
-				  						</button>
-				  				</form>
-				  				</div>		
+							<div className="d-flex w-50 h-50 border">
+								<div className="input-group-prepend border w-50">
+				    				<input id="username" name="username" type="text" className="form-control w-100 h-25 .fonts" placeholder="Username"/>
+				 				</div>
 							</div>
+							
 						</div>
 					</div>
 					) : (
