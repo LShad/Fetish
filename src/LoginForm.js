@@ -9,13 +9,17 @@ class LoginForm extends React.Component{
 			Login: false,
 			Register: false,
 		}
+		
+
+
+
 		this.Login = this.Login.bind(this);
 		this.Register = this.Register.bind(this);
 
 	}
 
-	Login(){
-
+	Login(event){
+		event.preventDefault()
 		const username = document.getElementById("username");
 		if (username.value == ""){ 
 		    window.alert("Please enter your Username"); 
@@ -23,11 +27,12 @@ class LoginForm extends React.Component{
 	 
 	  	}else{
 			
-	  		fetch('http://localhost:3001')
+	  		fetch('http://localhost:3001/user/damian/password/Papsi20!', {method:'POST', credentials: 'include'})
+	  		.then(data=>{console.log(data.text())})
 
-			/*this.setState({
+			this.setState({
 				Login: true
-			})*/
+			})
 		}	
 	}
 
@@ -36,6 +41,22 @@ class LoginForm extends React.Component{
 			Register: true
 		})	
 
+	}
+
+	async componentWillMount(){
+
+
+	  	const req = () => {
+		 	
+		 	let response = fetch('http://localhost:3001/user/damian/password/Papsi20!', {method:'POST', credentials: 'include'})
+		 	this.setState({
+				Login: true
+			})
+		}
+
+	  	await req()
+
+	  	console.log("tutaj1")
 	}
 
 	render(){
@@ -53,7 +74,7 @@ class LoginForm extends React.Component{
 							</div>
 							<div className="d-block input-group w-50 mt-4">
 			  					<div className="d-block w-50">
-			  					<form>
+			  					<form method="POST" onSubmit={this.Login}>
 				  					<div className="input-group-prepend">
 				    					<input id="username" name="username" type="text" className="form-control" placeholder="Username"/>
 				 					</div>
@@ -66,7 +87,7 @@ class LoginForm extends React.Component{
 											{ Register ? (<div>...</div>) : (<div>Register</div>) } 
 				  						</button>
 
-				  						<button type="submit" className="btn btn-secondary ml-2" onClick={this.Login}>
+				  						<button type="submit" className="btn btn-secondary ml-2">
 				  							Login 
 				  						</button>
 				  				</form>

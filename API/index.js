@@ -14,15 +14,16 @@ const knex = require('knex')({
   }
 });
 
-app.use(cors());
+app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 
-app.get('/user/:user/password/:password', (req, res) => {
-	knex.select('AAA').from('g.Notifications').then(data=>{
+app.post('/user/:user/password/:password', (req, res) => {
+	/*knex.select('AAA').from('g.Notifications').then(data=>{
 	});
-
+*/
 	var token = jwt.sign({ user: req.params.user, password: req.params.password }, 'DamianRatajczak');
-
-	res.send(token)
+	//res.set('Content-Type', 'set-cookie')
+	console.log(Date.now()+360000)
+	res.cookie("_keseasdasdw22" , token, {maxAge : Date.now() + 360000}).send("Cookie Sended")
 })
 
 app.get('/likes', (req, res) => {
