@@ -17,33 +17,41 @@ const knex = require('knex')({
 app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 
 app.post('/user/:user/password/:password', (req, res) => {
-	/*knex.select('AAA').from('g.Notifications').then(data=>{
-	});
-*/
-	var token = jwt.sign({ user: req.params.user, password: req.params.password }, 'DamianRatajczak');
-	res.cookie("_keseasdasdw22" , token, {maxAge : Date.now() + 360000}).send("Cookie Sended")
+	
+	console.log(req.params.user)
+	console.log(req.params.password)
+
+	knex.select('id')
+	  .from('g.Accounts')
+	  .where({
+	  	user: req.params.user,
+	  	passwd: req.params.password
+	  })
+	  .then((rows)=>{
+	    if(rows.length === 1){
+		    var token = jwt.sign({ id: rows[0].id }, 'DamianRatajczakMagicznyPosterunek:)');
+		    res.cookie("FetishCookie" , token, {maxAge : Date.now() + 360000})
+		    .send({status: true})
+		}else{
+			res.send({status: false})
+		}
+	  })
+	  .catch((error)=>{
+	  	console.error(error);
+	  	res.end()
+	  });
 
 })
 
 app.post('/auth/:auth', (req, res) => {
 
-	const token = req.params.auth
-	const decoded = jwt.verify(token, 'DamianRatajczak', (err, decoded)=>{
+	const decoded = jwt.verify(req.params.auth, 'DamianRatajczakMagicznyPosterunek:)', (err, decoded)=>{
 		if(err){
 			res.json({status: false})
 		} else{
 			res.json({status: true})
 		}
 	});
-	/*
-	const verify = jwt.verify(token, 'DamianRatajczak', (err, decode)=>{
-		if(err){
-			res.send("Not faking valid :)")
-		} else{
-			res.send("123")		
-		}
-	})
-	*/
 
 })
 
