@@ -1,6 +1,7 @@
 import React from 'react';
 import './Header.css';
 import $ from 'jquery';
+import Cookies from 'js-cookie';
 
 class Header extends React.Component{
 	constructor(props){
@@ -33,8 +34,8 @@ class Header extends React.Component{
 	}
 
 	logout(){
-		alert("Wylogowuje cie suko !")
-
+		const auth = Cookies.get('_keseasdasdw22')
+		Cookies.remove('_keseasdasdw22', { path: '' });
 		
 		window.location.replace("/");
 
@@ -46,8 +47,6 @@ class Header extends React.Component{
 
 	componentDidMount(){
 		$('#serce').on('click', this.onClick);
-
-	
 	}
 
 

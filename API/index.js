@@ -21,9 +21,30 @@ app.post('/user/:user/password/:password', (req, res) => {
 	});
 */
 	var token = jwt.sign({ user: req.params.user, password: req.params.password }, 'DamianRatajczak');
-	//res.set('Content-Type', 'set-cookie')
-	console.log(Date.now()+360000)
 	res.cookie("_keseasdasdw22" , token, {maxAge : Date.now() + 360000}).send("Cookie Sended")
+
+})
+
+app.post('/auth/:auth', (req, res) => {
+
+	const token = req.params.auth
+	const decoded = jwt.verify(token, 'DamianRatajczak', (err, decoded)=>{
+		if(err){
+			res.json({status: false})
+		} else{
+			res.json({status: true})
+		}
+	});
+	/*
+	const verify = jwt.verify(token, 'DamianRatajczak', (err, decode)=>{
+		if(err){
+			res.send("Not faking valid :)")
+		} else{
+			res.send("123")		
+		}
+	})
+	*/
+
 })
 
 app.get('/likes', (req, res) => {

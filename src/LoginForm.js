@@ -1,6 +1,7 @@
 import React from 'react';
 import AppBody from './AppBody';
 import Header from './Header';
+import Cookies from 'js-cookie';
 
 class LoginForm extends React.Component{
 	constructor(props){
@@ -8,6 +9,7 @@ class LoginForm extends React.Component{
 		this.state = {
 			Login: false,
 			Register: false,
+			Show: false,
 		}
 		
 
@@ -31,7 +33,8 @@ class LoginForm extends React.Component{
 	  		.then(data=>{console.log(data.text())})
 
 			this.setState({
-				Login: true
+				Login: true,
+				Show: true,
 			})
 		}	
 	}
@@ -46,27 +49,34 @@ class LoginForm extends React.Component{
 	async componentWillMount(){
 
 
-	  	const req = () => {
+	  	const req = async () => {
 		 	
-		 	let response = fetch('http://localhost:3001/user/damian/password/Papsi20!', {method:'POST', credentials: 'include'})
-		 	this.setState({
-				Login: true
-			})
+		 	const auth = Cookies.get('_keseasdasdw22')
+		 	console.log(auth)
+		 	let response = await fetch('http://localhost:3001/auth/' + auth, {method:'POST'})
+		 						.then(data=>data.json())
+		 						.then(data=>{
+		 							this.setState({
+		 								Login: data.status,
+		 								Show: true,
+		 							})
+		 						})
 		}
 
-	  	await req()
+	  	const _auth = await req()
 
-	  	console.log("tutaj1")
 	}
 
 	render(){
 
-		const { Login, Register } = this.state;
+		const { Login, Register, Show } = this.state;
 
 
 		return(
+		
 			<React.Fragment>
-				{ !Login ? (
+			{ Show ? (
+				 !Login ? (
 					<div className="container" style={{maxWidth:'1000px'}}>
 						<div className="d-inline-flex w-100 justify-content-center body-margin-top">
 							<div className="d-flex w-50">
@@ -101,8 +111,10 @@ class LoginForm extends React.Component{
 						<AppBody/>
 					</React.Fragment>
 					)
-				}
+				
+				) : (<div/>) }
 			</React.Fragment>
+			
 		);
 	}
 }
