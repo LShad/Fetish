@@ -34,8 +34,8 @@ class Header extends React.Component{
 	}
 
 	logout(){
-		const auth = Cookies.get('_keseasdasdw22')
-		Cookies.remove('_keseasdasdw22', { path: '' });
+		const auth = Cookies.get('FetishCookie')
+		Cookies.remove('FetishCookie', { path: '' });
 		
 		window.location.replace("/");
 
