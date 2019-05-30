@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const port = 3001
 const cors = require('cors');
+var jwt = require('jsonwebtoken');
 
 const knex = require('knex')({
   client: 'pg',
@@ -15,12 +16,13 @@ const knex = require('knex')({
 
 app.use(cors());
 
-app.get('/notifications', (req, res) => {
-	knex.select('AAA').from('g.Notifications').then((data=>{
-		console.log(data)
-		res.send("aga")
-	}));
-	
+app.get('/user/:user/password/:password', (req, res) => {
+	knex.select('AAA').from('g.Notifications').then(data=>{
+	});
+
+	var token = jwt.sign({ user: req.params.user, password: req.params.password }, 'DamianRatajczak');
+
+	res.send(token)
 })
 
 app.get('/likes', (req, res) => {

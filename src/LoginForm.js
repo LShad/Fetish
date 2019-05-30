@@ -22,9 +22,12 @@ class LoginForm extends React.Component{
 		    username.focus(); 
 	 
 	  	}else{
-			this.setState({
+			
+	  		fetch('http://localhost:3001')
+
+			/*this.setState({
 				Login: true
-			})
+			})*/
 		}	
 	}
 
@@ -50,21 +53,23 @@ class LoginForm extends React.Component{
 							</div>
 							<div className="d-block input-group w-50 mt-4">
 			  					<div className="d-block w-50">
+			  					<form>
 				  					<div className="input-group-prepend">
-				    					<input id="username" type="text" className="form-control" placeholder="Username"/>
+				    					<input id="username" name="username" type="text" className="form-control" placeholder="Username"/>
 				 					</div>
 				  						<p/>
 				  					<div className="input-group-prepend">
-				    					<input type="password" className="form-control" placeholder="Password"/>
+				    					<input type="password" name="password" className="form-control" placeholder="Password"/>
 				 					</div>
 				  						<p/>
-				  						<button type="button" className="btn btn-secondary" onClick={this.Register}>
+				  						<button className="btn btn-secondary" onClick={this.Register}>
 											{ Register ? (<div>...</div>) : (<div>Register</div>) } 
 				  						</button>
 
-				  						<button type="button" className="btn btn-secondary ml-2" onClick={this.Login}>
+				  						<button type="submit" className="btn btn-secondary ml-2" onClick={this.Login}>
 				  							Login 
 				  						</button>
+				  				</form>
 				  				</div>		
 							</div>
 						</div>
