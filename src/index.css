@@ -20,3 +20,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.login{
+  margin-left: 13%;
+}
+
+.login_form{
+  height: 30%;
+  margin-bottom: 1%;
+}
+
+.login_buttons{
+  height: 32%;
+  margin-top: 3%;
+}

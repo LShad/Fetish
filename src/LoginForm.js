@@ -125,25 +125,28 @@ class LoginForm extends React.Component{
 		
 			<React.Fragment>
 			{ Show ? (
-				 Login ? (
+				 !Login ? ( 
 					<div className="container h-100 border border-primary" >
-						<div className="d-inline-flex w-100  h-50 border border-secondary align-items-center">
-							<div className="d-flex w-50 border">
-								<img className="img w-100 h-100" src="logo.png" alt="logo"/>
-							</div>
-							<div className="d-flex flex-column w-50 h-50 border border-primary">
-								<div className="input-group-prepend border w-50 h-25">
+					<div className="d-flex h-75 w-100 border border-primary">
+						<div className="col-lg-12 w-100 h-50 align-self-center border border-secondary">
+							<div className="col-lg-6 float-left w-100 border">
+								<img className="img w-100 h-100" src="logo.png" alt="logo"/> 
+							</div> 
+							<div className="col-lg-6 float-left w-100 p-0 h-50 border border-primary">
+							<div className="col w-75 h-100 login p-0 border border-primary">
+								<div className="input-group-prepend border w-100 login_form">
 				    				<input id="username" onChange={ this.LoginOnChange } value={ UserValue } name="username" type="text" className="form-control w-100 h-100 .fonts" placeholder="Username"/>
 				 				</div>
-				 				<div className="input-group-prepend border w-50 h-25">
+				 				<div className="input-group-prepend border w-100 login_form"> 
 				    				<input id="password" onChange={ this.PasswordOnChange } value={ PasswordValue } name="password" type="text" className="form-control w-100 h-100 .fonts" placeholder="Password"/>
 				 				</div>
-				 				<div className="d-flex w-50 h-25 border">
-				 					<button className="btn btn-secondary w-50" onClick={this.Login}>Log in</button>
-				 					<button className="btn btn-secondary w-50" onClick={this.Register}>Register</button>
+				 				<div className="d-flex w-100 login_buttons border">
+				 					<button className="btn btn-secondary w-50 mr-1" onClick={this.Login}>Log in</button>
+				 					<button className="btn btn-secondary w-50 mr-1" onClick={this.Register}>Register</button>
 				 				</div>
 							</div>
-							
+							</div> 
+						</div>
 						</div>
 					</div>
 					) : (
