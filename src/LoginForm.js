@@ -1,7 +1,6 @@
 import React from 'react';
 import AppBody from './AppBody';
-import Header from './Header';
-import Cookies from 'js-cookie';
+import FetishCookie from './FetishCookie'
 
 class LoginForm extends React.Component{
 	constructor(props){
@@ -22,13 +21,18 @@ class LoginForm extends React.Component{
 
 	Login(event){
 
+		function showAlert(alertType, focusElement){
+			window.alert("Please enter your " + alertType ); 
+		}
+
 		if (this.state.UserValue == ""){ 
-		    window.alert("Please enter your Username"); 
-		    event.target.focus(); 
+		    showAlert("username", event)
 	 
+	  	}else if(this.state.PasswordValue == ""){
+	  		showAlert("password", event)
 	  	}else{
 			
-	  		fetch('http://localhost:3001/user/'+ this.state.UserValue + '/password/' + this.state.PasswordValue, {method:'POST', credentials: 'include'})
+	  		fetch('http://localhost:3001/login/user/'+ this.state.UserValue + '/password/' + this.state.PasswordValue, {method:'POST', credentials: 'include'})
 	  		.then(data=>data.json())
 	  		.then(data=>{
 	  			console.log(data.status)
@@ -37,6 +41,8 @@ class LoginForm extends React.Component{
 						Login: true,
 						Show: true,
 					})
+	  			}else{
+	  				window.alert("Wrong username or password");
 	  			}
 	  		})
 
@@ -56,21 +62,42 @@ class LoginForm extends React.Component{
 		})
 	}
 
-	Register(){
+	Register(event){
 		
-		this.setState({
-			Register: true
-		})	
+		function showAlert(alertType, focusElement){
+			window.alert("Please enter your " + alertType ); 
+		}
 
+		if (this.state.UserValue == ""){ 
+		    showAlert("username", event)
+	 
+	  	}else if(this.state.PasswordValue == ""){
+	  		showAlert("password", event)
+	  	}else{
+			
+	  		fetch('http://localhost:3001/register/user/'+ this.state.UserValue + '/password/' + this.state.PasswordValue, {method:'POST', credentials: 'include'})
+	  		.then(data=>data.json())
+	  		.then(data=>{
+	  			console.log(data)
+	  			if (data.status === true){
+	  				alert('Konto zostało utworzone')
+	  			}else{
+	  				switch (data.errorCode){
+	  					case "23505":
+	  						alert('Użytkownik już istnieje')
+	  						break;
+	  					default:
+	  						alert('Wystąpił błąd wewnętrzny')
+	  				}
+	  			}
+	  		})
+		}	
 	}
 
 	async componentWillMount(){
-
-
 	  	const req = async () => {
-		 	
-		 	const auth = Cookies.get('FetishCookie')
-		 	console.log(auth)
+	  		const asd = new FetishCookie()
+	  		const auth = asd.getCookie()
 		 	let response = await fetch('http://localhost:3001/auth/' + auth, {method:'POST'})
 		 						.then(data=>data.json())
 		 						.then(data=>{
@@ -78,8 +105,6 @@ class LoginForm extends React.Component{
 		 								Login: data.status,
 		 								Show: true,
 		 							})
-		 							console.log('Token poprawny')
-		 							console.log(data.status)
 		 						})
 		 						.catch( () =>{
 		 							this.setState({
@@ -88,7 +113,6 @@ class LoginForm extends React.Component{
 		 							})
 		 						})
 		}
-
 	  	const _auth = await req()
 	}
 
@@ -115,20 +139,16 @@ class LoginForm extends React.Component{
 				    				<input id="password" onChange={ this.PasswordOnChange } value={ PasswordValue } name="password" type="text" className="form-control w-100 h-100 .fonts" placeholder="Password"/>
 				 				</div>
 				 				<div className="d-flex w-50 h-25 border">
-				 					<button className="btn btn-secondary w-50" onClick={this.Login}>Zaloguj</button>
-				 					<button className="btn btn-secondary w-50" onClick={this.Register}>Wykutaś</button>
+				 					<button className="btn btn-secondary w-50" onClick={this.Login}>Log in</button>
+				 					<button className="btn btn-secondary w-50" onClick={this.Register}>Register</button>
 				 				</div>
 							</div>
 							
 						</div>
 					</div>
 					) : (
-					<React.Fragment>
-						<Header/>
-						<AppBody/>
-					</React.Fragment>
+						<AppBody username={UserValue}/>
 					)
-				
 				) : (<div/>) }
 			</React.Fragment>
 			
