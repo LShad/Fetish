@@ -101,7 +101,7 @@ class LoginForm extends React.Component{
 		
 			<React.Fragment>
 			{ Show ? (
-				 !Login ? (
+				 Login ? (
 					<div className="container h-100 border border-primary" >
 						<div className="d-inline-flex w-100  h-50 border border-secondary align-items-center">
 							<div className="d-flex w-50 border">
