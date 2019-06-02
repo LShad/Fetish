@@ -126,23 +126,23 @@ class LoginForm extends React.Component{
 			<React.Fragment>
 			{ Show ? (
 				 !Login ? ( 
-					<div className="container h-100 border border-primary" >
-					<div className="d-flex h-75 w-100 border border-primary">
-						<div className="col-lg-12 w-100 h-50 align-self-center border border-secondary">
-							<div className="col-lg-6 float-left w-100 border">
+					<div className="container h-100 " >
+					<div className="d-flex h-75 w-100">
+						<div className="col-md-12 w-100 h-50 align-self-center">
+							<div className="col-md-6 float-left w-100 ">
 								<img className="img w-100 h-100" src="logo.png" alt="logo"/> 
 							</div> 
-							<div className="col-lg-6 float-left w-100 p-0 h-50 border border-primary">
-							<div className="col w-75 h-100 login p-0 border border-primary">
-								<div className="input-group-prepend border w-100 login_form">
+							<div className="col-md-6 float-left w-100 p-0 h-50">
+							<div className="col w-75 h-100 login p-0 ">
+								<div className="input-group-prepend  w-100 login_form">
 				    				<input id="username" onChange={ this.LoginOnChange } value={ UserValue } name="username" type="text" className="form-control w-100 h-100 .fonts" placeholder="Username"/>
 				 				</div>
-				 				<div className="input-group-prepend border w-100 login_form"> 
+				 				<div className="input-group-prepend  w-100 login_form"> 
 				    				<input id="password" onChange={ this.PasswordOnChange } value={ PasswordValue } name="password" type="text" className="form-control w-100 h-100 .fonts" placeholder="Password"/>
 				 				</div>
-				 				<div className="d-flex w-100 login_buttons border">
+				 				<div className="d-flex w-100 login_buttons ">
 				 					<button className="btn btn-secondary w-50 mr-1" onClick={this.Login}>Log in</button>
-				 					<button className="btn btn-secondary w-50 mr-1" onClick={this.Register}>Register</button>
+				 					<button className="btn btn-secondary w-50 ml-1" onClick={this.Register}>Register</button>
 				 				</div>
 							</div>
 							</div> 
