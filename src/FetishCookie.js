@@ -6,10 +6,15 @@ class FetishCookie {
 	}
 
 	getCookie(){
-		console.log(this.cookieName)
 		const auth = Cookies.get("FetishCookie")
-		console.log(auth)
 		return auth
+	}
+
+	checkCookieToken(token){
+		const auth = Cookies.get("FetishCookie")
+		if(auth === undefined || auth!==token){
+			window.location.replace("/");
+		}
 	}
 }
 

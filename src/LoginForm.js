@@ -4,13 +4,15 @@ import FetishCookie from './FetishCookie'
 
 class LoginForm extends React.Component{
 	constructor(props){
-		super(props);
+		super();
 		this.state = {
 			Login: false,
 			Register: false,
 			Show: false,
 			UserValue: '',
 			PasswordValue: '',
+			Token: '',
+			Username: '',
 		}
 
 		this.Login = this.Login.bind(this);
@@ -35,11 +37,14 @@ class LoginForm extends React.Component{
 	  		fetch('http://localhost:3001/login/user/'+ this.state.UserValue + '/password/' + this.state.PasswordValue, {method:'POST', credentials: 'include'})
 	  		.then(data=>data.json())
 	  		.then(data=>{
-	  			console.log(data.status)
 	  			if(data.status === true){
+	  				const _FetishCookie = new FetishCookie()
+	  				const token = _FetishCookie.getCookie()
 	  				this.setState({
 						Login: true,
 						Show: true,
+						Token: token,
+						Username: this.state.UserValue,
 					})
 	  			}else{
 	  				window.alert("Wrong username or password");
@@ -96,14 +101,18 @@ class LoginForm extends React.Component{
 
 	async componentWillMount(){
 	  	const req = async () => {
-	  		const asd = new FetishCookie()
-	  		const auth = asd.getCookie()
-		 	let response = await fetch('http://localhost:3001/auth/' + auth, {method:'POST'})
+	  		const _FetishCookie = new FetishCookie()
+	  		const token = _FetishCookie.getCookie()
+	  		console.log(token)
+		 	let response = await fetch('http://localhost:3001/auth/' + token, {method:'POST'})
 		 						.then(data=>data.json())
 		 						.then(data=>{
+	
 		 							this.setState({
 		 								Login: data.status,
 		 								Show: true,
+		 								Token: token,
+		 								Username: data.username,
 		 							})
 		 						})
 		 						.catch( () =>{
@@ -118,7 +127,7 @@ class LoginForm extends React.Component{
 
 	render(){
 
-		const { Login, Register, Show, UserValue, PasswordValue } = this.state;
+		const { Login, Register, Show, UserValue, PasswordValue, Token, Username } = this.state;
 
 
 		return(
@@ -147,7 +156,7 @@ class LoginForm extends React.Component{
 						</div>
 					</div>
 					) : (
-						<AppBody username={UserValue}/>
+						<AppBody username={Username} token={Token}/>
 					)
 				) : (<div/>) }
 			</React.Fragment>
