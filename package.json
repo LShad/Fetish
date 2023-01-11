@@ -9,7 +9,7 @@
     "express": "^4.17.1",
     "js-cookie": "^2.2.0",
     "jsonwebtoken": "^8.5.1",
-    "knex": "^0.16.5",
+    "knex": "^2.4.0",
     "pg": "^7.11.0",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.8",
